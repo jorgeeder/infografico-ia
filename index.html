@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Tipos de Conhecimento em Computação e IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0A0F;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            padding: 20px;
+        }
+
+        /* Container com dimensão exata Full HD (1920x1080) */
+        .infographic {
+            width: 1920px;
+            height: 1080px;
+            background: radial-gradient(circle at 20% 30%, #0F0F17, #08080C);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            border-radius: 0px;
+        }
+
+        /* Grade digital sutil */
+        .infographic::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(42, 157, 244, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(42, 157, 244, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        /* Tipografia global */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #B0B3FF 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #E0E0FF;
+            border-left: 4px solid #2A9DF4;
+            padding-left: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #C0C4FF;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Cards glassmorphism */
+        .glass-card {
+            background: rgba(20, 22, 36, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(66, 88, 255, 0.2);
+            border-radius: 28px;
+            padding: 20px 18px;
+            transition: transform 0.2s ease, border-color 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(42, 157, 244, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Cores dos tipos */
+        .declarativo { color: #2A9DF4; }
+        .procedural { color: #2ACF6A; }
+        .heuristica { color: #9B59B6; }
+        .semantico { color: #F39C12; }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        /* Layout principal: grid flexível */
+        .container {
+            padding: 32px 48px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .persona {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.03);
+            padding: 8px 20px 8px 16px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .persona span {
+            font-size: 2rem;
+        }
+        .persona p {
+            font-size: 0.85rem;
+            color: #AAA;
+        }
+
+        /* 4 cards principais */
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        /* Seção representação */
+        .rep-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .rep-item {
+            background: rgba(12, 14, 26, 0.7);
+            border-radius: 20px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Fluxo de inferência */
+        .flow-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 32px;
+            padding: 20px 24px;
+            border: 1px solid rgba(155, 89, 182, 0.3);
+        }
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .flow-box {
+            background: #101018;
+            border-radius: 24px;
+            padding: 16px 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            border-top: 3px solid;
+        }
+        .arrow {
+            font-size: 2rem;
+            color: #6C63FF;
+        }
+        .process-group {
+            display: flex;
+            gap: 12px;
+            flex: 3;
+            justify-content: center;
+        }
+        .process-card {
+            background: #15151F;
+            border-radius: 20px;
+            padding: 12px;
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Tabela comparativa simplificada */
+        .comparison {
+            background: rgba(0,0,0,0.35);
+            border-radius: 28px;
+            padding: 16px 20px;
+            backdrop-filter: blur(4px);
+        }
+        .comp-table {
+            display: grid;
+            grid-template-columns: 1.2fr repeat(4, 1fr);
+            gap: 12px;
+            font-size: 0.75rem;
+        }
+        .comp-header {
+            font-weight: 700;
+            color: #DDD;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2A2A3A;
+        }
+        .comp-item {
+            padding: 8px 4px;
+            color: #BCBCE0;
+        }
+
+        hr {
+            border-color: #2A2A3A;
+            margin: 4px 0;
+        }
+
+        .small-text {
+            font-size: 0.7rem;
+            color: #8F8FAD;
+        }
+        .highlight {
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #5A5A7A;
+            margin-top: 8px;
+        }
+        @media (max-width: 1920px) {
+            .infographic {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="infographic">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div>
+                <h1>🧠 Conhecimento na Computação & IA</h1>
+                <p style="color:#AAA; font-size:1rem; margin-top: 6px;">Declarativo · Procedural · Heurístico · Semântico — como as máquinas organizam, aprendem e decidem</p>
+            </div>
+            <div class="persona">
+                <span>👨🏿‍💻</span>
+                <div>
+                    <strong style="color:white;">Jorge Eder</strong>
+                    <p>Graduando em Ciência da Computação</p>
+                    <p style="font-size:0.7rem;"> Santarém/PA - Brasil 🇧🇷</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. TIPOS DE CONHECIMENTO -->
+        <div>
+            <div class="section-title"><span>📌</span> Tipos de Conhecimento</div>
+            <div class="cards-row">
+                <div class="glass-card">
+                    <div class="badge-icon declarativo">📄</div>
+                    <h3 style="color:#2A9DF4;">Declarativo</h3>
+                    <p style="font-weight:500;">Saber o quê.</p>
+                    <p style="font-size:0.85rem; margin: 8px 0;">Fatos, conceitos, axiomas.</p>
+                    <p style="font-size:0.8rem; color:#CCC;"><strong>Ex.:</strong> Tabela SQL: "cliente_id = 101" · Base de fatos em sistemas especialistas.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="badge-icon procedural">⚙️</div>
+                    <h3 style="color:#2ACF6A;">Procedural</h3>
+                    <p style="font-weight:500;">Saber como.</p>
+                    <p style="font-size:0.85rem; margin: 8px 0;">Sequência de passos, algoritmos.</p>
+                    <p style="font-size:0.8rem; color:#CCC;"><strong>Ex.:</strong> Algoritmo de ordenação QuickSort · Funções Python / API REST.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="badge-icon heuristica">💡</div>
+                    <h3 style="color:#9B59B6;">Heurístico</h3>
+                    <p style="font-weight:500;">Saber atalhar.</p>
+                    <p style="font-size:0.85rem; margin: 8px 0;">Regras práticas, aproximações.</p>
+                    <p style="font-size:0.8rem; color:#CCC;"><strong>Ex.:</strong> Heurística A* (estimativa de distância) · “Pense passo a passo” (prompt).</p>
+                </div>
+                <div class="glass-card">
+                    <div class="badge-icon semantico">🔗</div>
+                    <h3 style="color:#F39C12;">Semântico</h3>
+                    <p style="font-weight:500;">Saber o significado.</p>
+                    <p style="font-size:0.85rem; margin: 8px 0;">Relações contextuais, rede de conceitos.</p>
+                    <p style="font-size:0.8rem; color:#CCC;"><strong>Ex.:</strong> Grafo de conhecimento: "Maria → conhece → João" · Embeddings vetoriais.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. FORMAS DE REPRESENTAÇÃO -->
+        <div>
+            <div class="section-title"><span>🗃️</span> Como os sistemas computacionais representam</div>
+            <div class="rep-grid">
+                <div class="rep-item"><span style="font-size:1.8rem;">🗄️</span><br><strong style="color:#2A9DF4;">Declarativo</strong><br><span class="small-text">Bancos de dados (SQL), dicionários JSON, ontologias formais</span></div>
+                <div class="rep-item"><span style="font-size:1.8rem;">🔧</span><br><strong style="color:#2ACF6A;">Procedural</strong><br><span class="small-text">Funções, workflows, microsserviços, código compilado</span></div>
+                <div class="rep-item"><span style="font-size:1.8rem;">🎲</span><br><strong style="color:#9B59B6;">Heurístico</strong><br><span class="small-text">Árvores de decisão, regras de associação, funções de avaliação</span></div>
+                <div class="rep-item"><span style="font-size:1.8rem;">🕸️</span><br><strong style="color:#F39C12;">Semântico</strong><br><span class="small-text">Grafos de conhecimento, RDF, redes neurais de memória</span></div>
+            </div>
+        </div>
+
+        <!-- 3. FLUXO DE INFERÊNCIA (DIAGRAMA VISUAL) -->
+        <div class="flow-section">
+            <div class="section-title" style="margin-bottom: 12px;">🔄 Fluxo de Inferência: do dado à decisão</div>
+            <div class="flow-diagram">
+                <div class="flow-box" style="border-top-color: #3B82F6;">
+                    <span style="font-size:1.8rem;">📊</span><br>
+                    <strong>Entrada de Dados</strong><br>
+                    <span class="small-text">Sensores · Texto · Usuário</span>
+                </div>
+                <div class="arrow">➡️</div>
+                <div class="process-group">
+                    <div class="process-card"><span style="color:#2A9DF4;">📄 Declarativo</span><br><span class="small-text">Base de fatos</span></div>
+                    <div class="process-card"><span style="color:#2ACF6A;">⚙️ Procedural</span><br><span class="small-text">Algoritmo</span></div>
+                    <div class="process-card"><span style="color:#9B59B6;">💡 Heurístico</span><br><span class="small-text">Regra de atalho</span></div>
+                    <div class="process-card"><span style="color:#F39C12;">🔗 Semântico</span><br><span class="small-text">Contexto / grafo</span></div>
+                </div>
+                <div class="arrow">➡️</div>
+                <div class="flow-box" style="border-top-color: #2ACF6A;">
+                    <span style="font-size:1.8rem;">✅</span><br>
+                    <strong>Saída / Decisão</strong><br>
+                    <span class="small-text">Recomendação · Ação · Classificação</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. COMPARAÇÃO VISUAL (FUNÇÃO, VANTAGENS, LIMITAÇÕES) -->
+        <div class="comparison">
+            <div class="section-title" style="margin-bottom: 4px;">⚖️ Comparação prática</div>
+            <div class="comp-table">
+                <div class="comp-header">Critério</div>
+                <div class="comp-header" style="color:#2A9DF4;">Declarativo</div>
+                <div class="comp-header" style="color:#2ACF6A;">Procedural</div>
+                <div class="comp-header" style="color:#9B59B6;">Heurístico</div>
+                <div class="comp-header" style="color:#F39C12;">Semântico</div>
+                
+                <div class="comp-item"><strong>Função</strong></div>
+                <div class="comp-item">Armazenar verdades</div>
+                <div class="comp-item">Executar passos</div>
+                <div class="comp-item">Resolver com velocidade</div>
+                <div class="comp-item">Entender contexto</div>
+                
+                <div class="comp-item"><strong>Vantagens</strong></div>
+                <div class="comp-item">✅ Fácil consulta, imutável</div>
+                <div class="comp-item">✅ Preciso, previsível</div>
+                <div class="comp-item">✅ Eficiente, adaptável</div>
+                <div class="comp-item">✅ Flexível, conectado</div>
+                
+                <div class="comp-item"><strong>Limitações</strong></div>
+                <div class="comp-item">⚠️ Não sabe *como* usar</div>
+                <div class="comp-item">⚠️ Rígido, não aprende</div>
+                <div class="comp-item">⚠️ Pode errar (viés)</div>
+                <div class="comp-item">⚠️ Alto custo computacional</div>
+                
+                <div class="comp-item"><strong>Aplicações IA</strong></div>
+                <div class="comp-item">BI, sistemas especialistas</div>
+                <div class="comp-item">Automação RPA, scripts</div>
+                <div class="comp-item">Jogos (NPCs), otimização</div>
+                <div class="comp-item">Chatbots (LLMs), busca</div>
+            </div>
+            <hr>
+            <footer>IA: Inteligência Artificial · SQL: Structured Query Language · RPA: Robotic Process Automation · Grafos de Conhecimento alimentam modelos semânticos modernos.</footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>
